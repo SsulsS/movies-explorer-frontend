@@ -18,12 +18,11 @@ const AboutMe = () => {
           </p>
 
           <ul className="about-me__links">
-            <li><a className="about-me__link" href="https://www.facebook.com/ia.stepanov" target="_blank" rel="noreferrer">Facebook</a></li>
             <li><a className="about-me__link" href="https://github.com/ia-stepanov" target="_blank" rel="noreferrer">Github</a></li>
           </ul>
         </div>
 
-        <img src={avatar} alt="about-me" className="about-me__image" />
+        <img src={avatar} alt="Аватар" className="about-me__image" />
       </div>
     </section>
   );
