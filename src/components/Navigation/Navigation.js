@@ -1,6 +1,7 @@
 import './Navigation.css';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import icon from '../../images/profile-icon.svg'
 
 const Navigation = () => {
   const [showItems, setShowItems] = useState(false);
@@ -26,7 +27,12 @@ const Navigation = () => {
               </li>
             </ul>
           </div>
-          <NavLink to="/profile" className="navigation__link navigation__link_type_profile" activeClassName="navigation__link_active">Аккаунт</NavLink>
+          <NavLink to="/profile" className="navigation__link navigation__link_type_profile" activeClassName="navigation__link_active">
+            <p className='navigation__sign'>Аккаунт</p> 
+            <div className='navigation__icon'>
+              <img src={icon} alt="Иконка"></img>
+            </div>
+          </NavLink>
         </div>
       </div>
     </nav>

@@ -6,6 +6,7 @@ function Form(props) {
   const { header, children, submit, question, path, link } = props;
 
   return (
+    <main>
     <section className="form">
       <div className="form__container">
         <Link to="/" className="form__link">
@@ -26,6 +27,7 @@ function Form(props) {
         </p>
       </div>
     </section>
+    </main>
   );
 }
 

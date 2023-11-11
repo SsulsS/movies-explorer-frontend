@@ -5,12 +5,14 @@ import savedMovies from '../../utils/savedMovies';
 
 const SavedMovies = () => {
   return (
+    <main>
     <div className="saved-movies">
       <SearchForm />
       <MoviesCardList 
       cards={savedMovies} 
       buttonMore={false} />
     </div>
+    </main>
   );
 };
 

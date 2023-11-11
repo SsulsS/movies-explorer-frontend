@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 const Profile = () => {
 
   return (
+    <main>
     <section className="profile">
       <form className="profile__form">
         <h1 className="profile__greeting">Привет, Виталий!</h1>
@@ -22,6 +23,7 @@ const Profile = () => {
         <Link to="/" className="profile__link">Выйти из аккаунта</Link>
       </form>
     </section>
+    </main>
   );
 };
 

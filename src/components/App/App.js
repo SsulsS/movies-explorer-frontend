@@ -25,7 +25,7 @@ function App() {
         <Route path="/movies" element={(
           <>
           <Header loggedIn={true} />
-          <Movies />
+            <Movies />  
           <Footer />
           </>
         )}>
