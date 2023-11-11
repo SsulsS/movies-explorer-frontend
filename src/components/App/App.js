@@ -12,7 +12,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   return (
-    <main className="App">
+    <div className="App">
       <Routes>
         <Route exact path="/" element={(
           <>
@@ -64,7 +64,7 @@ function App() {
         )}>
         </Route>
       </Routes>
-    </main>
+    </div>
   );
 }
 

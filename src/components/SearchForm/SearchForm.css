@@ -13,8 +13,7 @@
   width: 80.5%;
   margin: 0 0 40px;
   padding: 6px;
-  border: 1px solid rgba(170, 170, 170, .2);
-  border-radius: 50px;
+  border-bottom: 1px solid rgba(170, 170, 170, .2);
 }
 
 .search__input {
@@ -30,7 +29,6 @@
 .search__input:focus {
   width: 90%;
   outline: 1px solid black;
-  border-radius: 50px;
 }
 
 .search__input::placeholder {
