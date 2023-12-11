@@ -18,9 +18,9 @@ const AboutMe = () => {
           </p>
 
           <ul className="about-me__links">
-            <li><a className="about-me__link" href="https://www.linkedin.com/in/ia-stepanov/" target="_blank" rel="noreferrer">LinkedIn</a></li>
-            <li><a className="about-me__link" href="https://www.facebook.com/ia.stepanov" target="_blank" rel="noreferrer">Facebook</a></li>
-            <li><a className="about-me__link" href="https://t.me/ia_stepanov" target="_blank" rel="noreferrer">Telegram</a></li>
+            <li><a className="about-me__link" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+            <li><a className="about-me__link" href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></li>
+            <li><a className="about-me__link" href="https://t.me/" target="_blank" rel="noreferrer">Telegram</a></li>
 
           </ul>
         </div>
