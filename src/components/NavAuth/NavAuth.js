@@ -8,7 +8,7 @@ function NavAuth() {
         <li className="nav-auth__list-item">
           <Link to="/signup" className="nav-auth__link nav-auth__link_type_signup">Регистрация</Link>
         </li>
-        <li className="nav-auth__list-item">
+        <li className="auth__list-item">
           <Link to="/signin" className="nav-auth__link nav-auth__link_type_signin">Войти</Link>
         </li>
       </ul>
