@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate, Navigate, withRouter } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -107,7 +107,7 @@ function App() {
           <Route exact path="/" element={<Main />}/>  
 
            <Route path="/movies" element={
-            <ProtectedRoute
+            <Movies
             loggedIn={loggedIn}
             component={Movies}
             isLoading={isLoading}
@@ -132,26 +132,9 @@ function App() {
           />
           }/>
           
+          <Route path="/signin" element={isLoading ? <Preloader /> : !loggedIn ? <Login onLogin={onLogin} /> : <Navigate to="/movies" />}/>     
 
-          
-
-          <Route path="/signin">
-            {() =>
-              isLoading ? <Preloader /> : !loggedIn ? <Login onLogin={onLogin} /> : <Navigate to="/movies" />
-            }
-          </Route>
-
-          <Route path="/signup">
-            {() =>
-              isLoading ? (
-                <Preloader />
-              ) : !loggedIn ? (
-                <Register onRegister={onRegister} />
-              ) : (
-                <Navigate to="/movies" />
-              )
-            }
-          </Route>
+          <Route path="/signup" element={isLoading ? (<Preloader />) : !loggedIn ? (<Register onRegister={onRegister} />) : (<Navigate to="/movies" />)}/>
 
           <Route path="*" element={<PageNotFound />}/>
         </Routes>
