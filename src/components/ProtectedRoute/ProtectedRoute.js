@@ -1,11 +1,11 @@
-import { Route, Navigate } from 'react-router-dom';
+import { Route, Navigate, Routes } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
   return (
-    <Route>
-      {() => (props.isLoading ? <Preloader /> : props.loggedIn ? <Component {...props} /> : <Navigate to="/" />)}
-    </Route>
+    <Routes>
+      <Route element={props.isLoading ? <Preloader /> : props.loggedIn ? <Component {...props} /> : <Navigate to="/" />}/>
+    </Routes>
   );
 };
 

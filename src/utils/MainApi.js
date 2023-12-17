@@ -87,7 +87,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  address: 'https://api.movies.ssulss.nomoredomains.ru',
+  address: 'https://api.movies.ssulss.nomoredomainsrocks.ru/',
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',

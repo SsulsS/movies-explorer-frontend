@@ -21,7 +21,7 @@
 
 .navigation__sidebar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -52,7 +52,7 @@
   display: flex;
   padding: 0;
   list-style: none;
-  margin: 4px 0 0 0;
+  margin: 4px 50px 0 0;
 }
 
 .navigation__list-item {

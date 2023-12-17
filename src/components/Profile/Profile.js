@@ -48,7 +48,7 @@ const Profile = ({ onSignOut, openPopup }) => {
   }
 
   return (
-    <section className="profile">
+    <section className="profile" id="profile">
       <form className="profile__form" onSubmit={handleSubmit}>
         <h3 className="profile__greeting">Привет, {name}!</h3>
         <div className="profile__inputs">

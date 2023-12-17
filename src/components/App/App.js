@@ -21,7 +21,7 @@ function App() {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [popupTitle, setPopupTitle] = useState('');
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -29,6 +29,16 @@ function App() {
   useEffect(() => {
     getUserInfo();
   }, []);
+
+  function openPopup(textError) {
+    setPopupTitle(textError);
+    setIsOpenPopup(true);
+  }
+
+  function closePopup() {
+    setIsOpenPopup(false);
+    setPopupTitle('');
+  }
 
   function getUserInfo() {
     MainApi.getUserInfo()
@@ -76,16 +86,6 @@ function App() {
       });
   }
 
-  function openPopup(textError) {
-    setPopupTitle(textError);
-    setIsOpenPopup(true);
-  }
-
-  function closePopup() {
-    setIsOpenPopup(false);
-    setPopupTitle('');
-  }
-
   function onSignOut() {
     Token.removeToken();
     setLoggedIn(false);
@@ -107,7 +107,7 @@ function App() {
           <Route exact path="/" element={<Main />}/>  
 
            <Route path="/movies" element={
-            <Movies
+            <ProtectedRoute
             loggedIn={loggedIn}
             component={Movies}
             isLoading={isLoading}
@@ -123,7 +123,7 @@ function App() {
           />
           }/>
           <Route path="/profile" element={
-            <ProtectedRoute
+            <Profile
             loggedIn={loggedIn}
             component={Profile}
             isLoading={isLoading}
