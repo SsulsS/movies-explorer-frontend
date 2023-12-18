@@ -1,6 +1,6 @@
 import './Techs.css';
 
-function Techs() {
+const Techs = () => {
   return (
     <section className="techs" id="techs">
       <h2 className="techs__header">Технологии</h2>

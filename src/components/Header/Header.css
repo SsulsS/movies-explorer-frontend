@@ -1,149 +1,141 @@
 .header {
-    background-color: #F3C1F8;
+    padding: 18px 70px;
     max-width: 1280px;
-    width: 100%;
-    height: 74px;
- }
- 
- .header__actions {
     display: flex;
+    justify-content:space-between;
     align-items: center;
-    justify-content: space-between;
-    padding: 18px 65px 10px;
- }
- 
- .header__logo {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: white;
+}
+.header_type_auth{
+    background-color: #F3C1F8;
+}
+
+.header_landing {
+    background-color: #F3C1F8;
+}
+
+.header__logo {
     width: 38px;
     height: 38px;
-    margin-left: 5px;
- }
- 
- .header__logo:hover {
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    cursor: pointer;
- }
- 
- .header__navigation {
+    background: url(../../images/logo.svg) center / contain no-repeat;
+}
+
+.header__logo:hover {
+    opacity: .7;
+}
+
+.header__logo:active {
+    transform: scale(.9);
+}
+
+.header__auth-items {
     display: flex;
-    justify-content: flex-end;
-    padding-right: 5px;
-    padding-bottom: 5px;
- }
- 
- .header__link {
+    align-items: center;
+    column-gap: 30px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.burger {
+    height: 26px;
+    width: 32px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    z-index: 11;
+}
+
+@media screen and (max-width: 800px) {
+    .burger {
+        display: flex;
+    }
+}
+
+.burger__line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: black;
+}
+
+.burger__line_first_opened {
+    transform: rotate(45deg);
+}
+
+.burger__line_first {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.burger__line_second {
+    transition: transform 0.2s ease-in-out;
+}
+
+.burger__line_second_opened {
+    transform: scaleY(0);
+}
+
+.burger__line_third {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.burger__line_third_opened {
+    transform: rotate(-45deg);
+}
+
+
+
+.header__auth-item {
     color: #000000;
+    text-decoration: none;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-    text-decoration: none;
- }
- 
- .header__link:hover {
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    cursor: pointer;
- }
- 
- .header__signup-link {
-    padding-top: 8px;
- }
- 
- .header__signin-link {
+}
+
+.header__auth-item_highlighted {
+    color: #FFFFFF;
     background-color: #000000;
     border-radius: 3px;
-    width: 76px;
-    height: 24px;
-    color: #fff;
-    text-align: center;
-    margin-left: 30px;
-    padding-top: 8px;
- }
- 
- .header__signin-link:hover {
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    cursor: pointer;
- }
- 
- .header__burger-menu-button {
-    display: none;
- }
- 
- .header__burger-menu-button:hover {
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    cursor: pointer;
- }
- 
- @media (max-width: 768px) {
-    .header__burger-menu-button {
-       display: block;
+    padding: 8px 20px;
+}
+
+.header__auth-item:hover {
+    opacity: .7;
+}
+
+.header__auth-item_highlighted:active {
+    transform: scale(.98);
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 18px 30px;
     }
- 
-    .header__actions {
-       padding: 0;
-       padding-top: 17px;
-       width: 93%;
-       margin: 0 auto;
+}
+
+@media screen and (max-width: 450px) {
+    .header {
+        padding: 18px 14px;
     }
- 
-    .header__logo {
-       margin-left: 3px;
+
+    .header__auth-items {
+        column-gap: 14px;
     }
- 
-    .header__navigation {
-       padding-top: 3px;
-       padding-right: 3px;
+
+    .header__auth-item {
+        font-size: 10px;
+        line-height: 16px;
     }
- }
- 
- .header__burger-menu-button {
-    background-image: url(../../images/burger-menu-btn.svg);
-    background-color: transparent;
-    border: none;
-    width: 44px;
-    height: 44px;
- }
- 
- @media (max-width: 700px) {
-    .header__actions {
-       margin-left: 0;
-       margin-right: 0;
-       padding-left: 17px;
-       padding-right: 17px;
-       width: 93%;
+
+    .header__auth-item_highlighted {
+        padding: 5px 12px;
     }
- }
- 
- @media (max-width: 500px) {
-    .header__actions {
-       padding-left: 8px;
-       padding-right: 8px;
-    }
- 
-    .header__navigation {
-       padding-right: 0;
-    }
- }
- 
- @media (max-width: 320px) {
-    .header__logo {
-       margin-right: 20px;
-    }
- 
-    .header__link {
-       font-size: 10px;
-       font-weight: 500;
-       line-height: 16px;
-       letter-spacing: 0px;
-    }
- 
-    .header__signin-link,
-    .header__signup-link {
-       width: 54px;
-       height: 22px;
-       padding-top: 5px;
-       margin-left: 24px;
-    }
- }
+}
