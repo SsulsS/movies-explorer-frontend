@@ -1,6 +1,6 @@
 import './Popup.css';
 
-const Popup = ({ text, isOpen, onClose }) => {
+function Popup({ text, isOpen, onClose }) {
   return (
     <section className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">

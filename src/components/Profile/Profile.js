@@ -1,9 +1,10 @@
 import './Profile.css';
 import { useState, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import mainApi from '../../utils/MainApi';
+import {MainApi} from '../../utils/MainApi';
 
-const Profile = ({ onSignOut, openPopup }) => {
+
+function Profile({ onSignOut, openPopup }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [lastName, setLastName] = useState(currentUser.name);
@@ -14,7 +15,7 @@ const Profile = ({ onSignOut, openPopup }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    mainApi.updateUserInfo({ name, email }).then(() => {
+    MainApi.updateUser({ name, email }).then(() => {
       setVisibleButton(false);
       setLastName(name);
       setLastEmail(email);

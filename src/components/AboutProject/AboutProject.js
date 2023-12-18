@@ -1,6 +1,6 @@
 import './AboutProject.css';
 
-const AboutProject = () => {
+function AboutProject() {
   return (
     <section className="about-project" id="project">
       <div className="about-project__content">

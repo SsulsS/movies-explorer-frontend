@@ -1,7 +1,7 @@
 import './AboutMe.css';
 import avatar from '../../images/avatar.jpg';
 
-const AboutMe = () => {
+function AboutMe() {
   return (
     <section className="about-student">
       <div className="about-student__content">
