@@ -1,62 +1,60 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import Navigation from '../Navigation/Navigation';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import logo from '../../images/logo.svg';
+import React, { useEffect, useState } from 'react';
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
+import filterMovies from '../../utils/config';
 
-function Header({ loggedIn }) {
-   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-   const location = useLocation();
-   const isWhiteBackground = location.pathname !== '/';
+function SavedMovies({ savedMovies, onDelete, isLoading, error }) {
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies);
+  const [currentQuery, setCurrentQuery] = useState('');
+  const [isShortMovies, setIsShortMovies] = useState(false);
 
-   function handleOpenBurgerMenu() {
-      setIsBurgerMenuOpen(true);
-   }
+  const handleSearch = (query) => {
+    setCurrentQuery(query);
+    const result = filterMovies(savedMovies, query, isShortMovies);
+    setFilteredMovies(result);
+  };
 
-   function handleCloseBurgerMenu() {
-      setIsBurgerMenuOpen(false);
-   }
+  const handleCheckboxChange = (checked) => {
+    setIsShortMovies(checked);
+    const result = filterMovies(savedMovies, currentQuery, checked);
+    setFilteredMovies(result);
+  };
 
-   const renderHeader = () => {
-      if (loggedIn) {
-         return (
-            <div>
-               <div className='header__actions'>
-                  <Link to='/'><img src={logo} alt='Логотип' className='header__logo' /></Link>
-                  <div className='header__navigation'>
-                     <Navigation isWhiteBackground={isWhiteBackground} />
-                  </div>
-                  <button
-                     className='header__burger-menu-button'
-                     onClick={handleOpenBurgerMenu}
-                  />
-               </div>
-               <BurgerMenu
-                  isOpen={isBurgerMenuOpen}
-                  onCloseBurgerMenu={handleCloseBurgerMenu}
-               />
-            </div>
-         );
-      } else {
-         return (
-            <div className='header__actions'>
-               <img src={logo} alt='Логотип' className='header__logo' />
-               <div className='header__navigation'>
-                  <Link to='/sign-up' className='header__signup-link header__link'>Регистрация</Link>
-                  <Link to='/sign-in' className='header__signin-link header__link'>Войти</Link>
-               </div>
-            </div>
-         );
-      }
-   };
+  useEffect(() => {
+    setFilteredMovies(savedMovies);
+  }, [savedMovies])
 
-   const backgroundColor = location.pathname === '/' ? '#F3C1F8' : '#fff';
+  const renderContent = () => {
+    if (isLoading) {
+      return <Preloader />;
+    }
+    if (error) {
+      return <p>{error}</p>;
+    }
+    if (filteredMovies.length === 0) {
+      return <p>Ничего не найдено</p>;
+    }
+    return (
+      <MoviesCardList
+        movies={filteredMovies}
+        onDelete={onDelete}
+        isSavedMoviePage={true}
+        savedMovies={savedMovies}
+      />
+    );
+  };
 
-   return (
-      <header className='header' style={{ backgroundColor: backgroundColor }}>
-         {renderHeader()}
-      </header>
-   );
+  return (
+    <section className='saved-movies'>
+      <SearchForm
+        onSearch={handleSearch}
+        isChecked={isShortMovies}
+        setChecked={handleCheckboxChange}
+      />
+      {renderContent()}
+    </section>
+  );
 }
 
-export default Header;
+export default SavedMovies;
