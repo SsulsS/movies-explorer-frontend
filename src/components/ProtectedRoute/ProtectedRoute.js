@@ -1,12 +1,8 @@
-import { Route, Navigate, Routes } from 'react-router-dom';
-import Preloader from '../Preloader/Preloader';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
-function ProtectedRoute({ component: Component, ...props }) {
-  return (
-    <Routes>
-      <Route element={props.isLoading ? <Preloader /> : props.loggedIn ? <Component {...props} /> : <Navigate to="/" />}/>
-    </Routes>
-  );
+const ProtectedRoute = ({ component: Component, loggedIn, isCheckingToken, ...props }) => {
+  if (isCheckingToken) return null;
+  return loggedIn ? <Component {...props} /> : <Navigate to='/' replace />;
 };
-
 export default ProtectedRoute;

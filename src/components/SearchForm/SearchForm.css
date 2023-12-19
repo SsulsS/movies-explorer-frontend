@@ -6,6 +6,12 @@
     width: calc(100% - 140px);
 }
 
+.search__container{
+    display: flex;
+    flex-direction: row;
+    position:relative;
+}
+
 .search__checkbox-container {
     margin-top: 26px;
     background: transparent;
@@ -137,14 +143,12 @@
     border: none;
     outline: none;
     cursor: pointer;
-
     text-align: center;
-
     color: #FFFFFF;
-    position: absolute;
     top: 0;
     right: 0;
     margin: 10px;
+    position: absolute;
 }
 
 @media screen and (max-width: 768px) {
