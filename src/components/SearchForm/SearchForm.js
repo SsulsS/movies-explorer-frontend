@@ -1,5 +1,6 @@
 import './SearchForm.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import searchIcon from '../../images/search.svg';
 
 function SearchForm({ onSearch, isChecked, setChecked, initialValue, onInputChange }){
   const [inputSearch, setInputSearch] = useState(initialValue || '');
@@ -21,23 +22,20 @@ function SearchForm({ onSearch, isChecked, setChecked, initialValue, onInputChan
 };
 
   return (
-    <form className="search">
-      <div className="search__container">
-        <input className="search__input" placeholder="Фильм" type="text" value={inputSearch || ''} onChange={handleInputChange} required />
-        <button type="submit" className="search__button" onClick={handleSubmit}>Найти</button>
-        <div className="search__toggle">
-        <p className="search__films">Короткометражки</p>
-        <label className="search__tumbler">
-
-          <input className="search__checkbox" type="checkbox" checked={isChecked} onChange={() => setChecked(!isChecked)} />
-          
-          <span className="search__slider" />
-        </label>
+    <div className='search'>
+         <div className='search__container'>
+            <img src={searchIcon} alt='Лупа' className='search__icon' />
+            <form className='search__form' onSubmit={handleSubmit}>
+               <input type='text' placeholder='Фильм' className='search__input' value={inputSearch} onChange={handleInputChange}/>
+               <button type='submit' className='search__button'>Найти</button>
+            </form>
+            <div className='search__checkbox'>
+              <input id='shortFilmToggle' type='checkbox' checked={isChecked} onChange={() => setChecked(!isChecked)}/>
+              <label htmlFor='shortFilmToggle' className='search__checkbox-title'> Короткометражки </label>
+            </div>
+         </div>
+         {error && <p className='search__error'>{error}</p>}
       </div>
-        
-      </div>
-      
-    </form>
   );
 };
 
