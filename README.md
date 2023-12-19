@@ -4,5 +4,6 @@
  ссылка на git : https://github.com/SsulsS/movies-explorer-frontend/pull/5
  Ссылка Frontend: movies.ssulss.nomoredomainsrocks.ru
  Ссылка Beckend: api.movies.ssulss.nomoredomainsrocks.ru
- API: 84.201.135.135
+ API: 84.201.132.232
+
     
