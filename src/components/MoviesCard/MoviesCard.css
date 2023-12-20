@@ -49,6 +49,7 @@
   background-position: center;
   width: 20px;
   height: 20px;
+  display: block;
 }
 
 .card__delete-button {
@@ -104,6 +105,10 @@
   .card__title {
      width: 75%;
   }
+
+  .card__save-button{
+    right: 35px;
+  }
 }
 
 @media screen and (max-width: 1160px) {
@@ -115,11 +120,37 @@
   .card__details {
      margin-top: 10px;
   }
+
+  .card__save-button{
+    right: 136px;
+  }
+}
+
+@media screen and (max-width: 1060px) {
+  .card__save-button{
+    right: 125px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .card__save-button{
+    right: 100px;
+  }
 }
 
 @media screen and (max-width: 960px) {
   .card__details {
      margin-top: 21px;
+  }
+
+  .card__save-button{
+    right: 75px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .card__save-button{
+    right: 60px;
   }
 }
 
@@ -128,12 +159,20 @@
      width: 339px;
      height: 190px;
   }
+
+  .card__save-button{
+    right: 60px;
+  }
 }
 
 @media (max-width: 760px) {
   .card__image {
      width: 300px;
      height: 168px;
+  }
+
+  .card__save-button{
+    right: 40px;
   }
 }
 
@@ -142,12 +181,25 @@
      width: 280px;
      height: 156px;
   }
+
+  .card__save-button{
+    right: 50px;
+  }
 }
 
 @media (max-width: 660px) {
   .card__image {
      width: 300px;
      height: 168px;
+  }
+
+  .card__save-button{
+    right: 30px;
+    display: block;
+  }
+
+  .card__delete-button{
+    display: block;
   }
 }
 

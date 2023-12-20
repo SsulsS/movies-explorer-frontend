@@ -1,8 +1,9 @@
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/config';
 import { formatDuration } from '../../utils/config';
+import { memo } from 'react';
 
-function MovieCard({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }) {
+const MovieCard =memo(({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }) => {
   const imageUrl = isSavedMoviePage ? movie.image : BASE_URL + movie.image.url;
   const isSaved = savedMovies.some(item => item?.movieId === movie.id);
 
@@ -23,6 +24,7 @@ function MovieCard({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }) {
         {isSavedMoviePage ? (
           <button className='card__delete-button card__save-button' onClick={handleDelete}>
           </button>
+
         ) : (
           <button
             className={`card__save-button ${isSaved ? 'card__save-button_saved' : ''}`}
@@ -38,6 +40,6 @@ function MovieCard({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }) {
       </div>
     </div>
   );
-}
+})
 
 export default MovieCard;

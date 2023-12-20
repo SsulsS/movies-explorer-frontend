@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Header from '../Header/Header';
@@ -13,7 +13,6 @@ import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Popup from '../Popup/Popup';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { moviesApi } from '../../utils/MoviesApi';
 import { authApi } from '../../utils/AuthApi';
 import { mainApi } from '../../utils/MainApi';
 
@@ -31,7 +30,6 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
 
   const [error, setError] = useState(null);
@@ -127,17 +125,19 @@ function App() {
   };
 
 
-  const handleDeleteMovie = (movie) => {
-    return mainApi.removeMovie(movie._id)
-      .then(() => {
-        setSavedMovies((savedMovies) =>
+  const handleDeleteMovie =  useCallback((movie) => {
+     mainApi.removeMovie(movie._id)
+      .then((res) => {
+        setSavedMovies(
           savedMovies.filter((item) => item._id !== movie._id)
         )
       })
       .catch((err) => {
         console.error('Ошибка при удалении фильма: ', err);
       });
-  }
+  }, [])
+
+  
 
 
   const handleLogout = () => {
@@ -172,23 +172,8 @@ function App() {
     }
   }, []);
 
-
   useEffect(() => {
-    setIsLoading(true);
-    moviesApi.getInitialMovies()
-      .then((data) => {
-        setAllMovies(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error('Ошибка при получении фильмов: ', err);
-        setError('Ошибка при загрузке фильмов');
-        setIsLoading(false);
-      });
-  }, [userSessionChanged]);
-
-
-  useEffect(() => {
+    console.log();
     mainApi.getSavedMovies()
       .then((movies) => {
         setSavedMovies(movies);
@@ -205,7 +190,7 @@ function App() {
     }
   }, [loggedIn, location.pathname, navigate]);
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <div className="page">
         {!hideForHeader.includes(location.pathname) && <Header loggedIn={loggedIn} />}
 
@@ -219,9 +204,10 @@ function App() {
                 component={Movies}
                 movies={allMovies}
                 error={error}
-                isLoading={isLoading}
                 savedMovies={savedMovies}
                 onSave={handleSaveMovie}
+                setAllMovies={setAllMovies}
+                setError={setError}
           />}/>
           
           <Route path="/saved-movies" element={

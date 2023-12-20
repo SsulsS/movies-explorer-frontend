@@ -4,13 +4,16 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import filterMovies from '../../utils/config';
+import { moviesApi } from '../../utils/MoviesApi';
 
 
-function Movies({ movies, error, isLoading, onSave, savedMovies  }) {
+function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
   const [query, setQuery] = useState(localStorage.getItem('searchQuery') || '');
   const [isChecked, setChecked] = useState(localStorage.getItem('isShortFilmChecked') === 'true');
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem('filteredMovies')) || []);
   const [inputValue, setInputValue] = useState(localStorage.getItem('inputValue') || '');
+  const [isLoading, setIsLoading] = useState(true);
+  const [request, setRequest] = useState(false)
 
   useEffect(() => {
      localStorage.setItem('searchQuery', query);
@@ -33,9 +36,25 @@ function Movies({ movies, error, isLoading, onSave, savedMovies  }) {
      setFilteredMovies(result);
   }, [movies, query, isChecked]);
 
+  const HandleRequest = () => {
+      setIsLoading(true);
+   moviesApi.getInitialMovies()
+     .then((data) => {
+       setAllMovies(data);
+       setIsLoading(false);
+     })
+     .catch((err) => {
+       console.error('Ошибка при получении фильмов: ', err);
+       setError('Ошибка при загрузке фильмов');
+       setIsLoading(false);
+     });
+     setRequest(true)
+  } 
+
   const handleSearchMovies = (newQuery) => {
-     const lowercaseQuery = newQuery.toLowerCase();
-     const searchResult = movies.filter(movie =>
+      if (!request) {HandleRequest()}
+      const lowercaseQuery = newQuery.toLowerCase();
+      const searchResult = movies.filter(movie =>
         movie.nameRU.toLowerCase().includes(lowercaseQuery)
      );
      setFilteredMovies(searchResult);

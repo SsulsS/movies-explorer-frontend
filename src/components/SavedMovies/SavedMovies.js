@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import filterMovies from '../../utils/config';
 
-function SavedMovies({ savedMovies, onDelete, isLoading, error }) {
+function SavedMovies({ savedMovies, onDelete, isLoading, error}) {
   const [filteredMovies, setFilteredMovies] = useState(savedMovies);
   const [currentQuery, setCurrentQuery] = useState('');
   const [isShortMovies, setIsShortMovies] = useState(false);

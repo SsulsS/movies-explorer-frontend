@@ -1,4 +1,3 @@
-import './Profile.css'
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -14,6 +13,7 @@ function Profile({ onLogout, onUpdateProfile, serverError, setServerError }) {
   const [emailError, setEmailError] = useState(''); 
 
 
+  console.log(currentUser);
   useEffect(() => {
     if (currentUser) {
       setName(currentUser.name);
