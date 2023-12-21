@@ -4,6 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import filterMovies from '../../utils/config';
 import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
 
 function SavedMovies({ savedMovies, onDelete, isLoading, error, setSavedMovies, userSessionChanged}) {
   const [filteredMovies, setFilteredMovies] = useState(savedMovies);
@@ -27,17 +28,6 @@ function SavedMovies({ savedMovies, onDelete, isLoading, error, setSavedMovies, 
     const result = filterMovies(savedMovies, currentQuery, isShortMovies);
     setFilteredMovies(result);
   }, [savedMovies])
-
-  useEffect(() => {
-    console.log();
-    mainApi.getSavedMovies()
-      .then((movies) => {
-        setSavedMovies(movies);
-      })
-      .catch((err) => {
-        console.error('Ошибка при получении сохраненных фильмов: ', err);
-      });
-  }, [userSessionChanged]);
 
   const renderContent = () => {
     if (isLoading) {

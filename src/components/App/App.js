@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect, useCallback  } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Header from '../Header/Header';
@@ -89,7 +89,6 @@ function App() {
 
 
   const handleSaveMovie = (movie) => {
-
     const isSaved = savedMovies.some((item) => item.movieId === movie.id);
     if (savedMovies.some(item => item === undefined)) {
       console.error("В массиве savedMovies есть undefined элементы!");
@@ -136,8 +135,8 @@ function App() {
         console.error('Ошибка при удалении фильма: ', err);
       });
   }
-  
 
+  
 
   const handleLogout = () => {
     localStorage.clear();
@@ -151,6 +150,16 @@ function App() {
     navigate('/');
   };
 
+  useEffect(() => {
+    console.log();
+    mainApi.getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((err) => {
+        console.error('Ошибка при получении сохраненных фильмов: ', err);
+      });
+  }, [userSessionChanged]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -195,6 +204,7 @@ function App() {
                 onSave={handleSaveMovie}
                 setAllMovies={setAllMovies}
                 setError={setError}
+                userSessionChanged={userSessionChanged}
           />}/>
           
           <Route path="/saved-movies" element={

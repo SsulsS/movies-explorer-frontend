@@ -12,7 +12,7 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
   const [isChecked, setChecked] = useState(localStorage.getItem('isShortFilmChecked') === 'true');
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem('filteredMovies')) || []);
   const [inputValue, setInputValue] = useState(localStorage.getItem('inputValue') || '');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [request, setRequest] = useState(false)
 
   useEffect(() => {
@@ -32,8 +32,11 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
   }, [inputValue]);
 
   useEffect(() => {
-     const result = filterMovies(movies, query, isChecked);
-     setFilteredMovies(result);
+   if(movies.length>0){
+      const result = filterMovies(movies, query, isChecked);
+      setFilteredMovies(result);
+   }
+     
   }, [movies, query, isChecked]);
 
   const HandleRequest = () => {
@@ -52,11 +55,12 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
    } 
 
   const handleSearchMovies = (newQuery) => {
-      HandleRequest()
+      if (!request){HandleRequest()}
       const lowercaseQuery = newQuery.toLowerCase();
       const searchResult = movies.filter(movie =>
         movie.nameRU.toLowerCase().includes(lowercaseQuery)
      );
+     console.log(3,filteredMovies);
      setFilteredMovies(searchResult);
      setQuery(newQuery); 
   };
@@ -68,7 +72,7 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
      if (error) {
         return <p>{error}</p>;
      }
-     if (filteredMovies.length === 0) {
+     if (filteredMovies.length === 0 && request) {
         return <p>Ничего не найдено</p>;
      }
      return <MoviesCardList
@@ -88,7 +92,7 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
             initialValue={inputValue}
             onInputChange={setInputValue}
          />
-      {request && renderContent()}
+      {renderContent()}
     </section>
   );
 };
