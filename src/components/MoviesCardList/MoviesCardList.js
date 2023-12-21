@@ -15,7 +15,7 @@ function MoviesCardList({ movies, onSave, savedMovies, onDelete, isSavedMoviePag
     const handleResize = () => {
       const width = window.innerWidth;
       let count;
-      if (savedMovies) count = savedMovies.length;
+      if (isSavedMoviePage) count = savedMovies.length;
       else if (width >= LARGE_SCREEN_WIDTH) count = LARGE_SCREEN_CARDS_COUNT;
       else if (width >= MEDIUM_SCREEN_WIDTH) count = MEDIUM_SCREEN_CARDS_COUNT;
       else count = SMALL_SCREEN_CARDS_COUNT;

@@ -38,21 +38,21 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
 
   const HandleRequest = () => {
       setIsLoading(true);
-   moviesApi.getInitialMovies()
-     .then((data) => {
-       setAllMovies(data);
-       setIsLoading(false);
-     })
-     .catch((err) => {
-       console.error('Ошибка при получении фильмов: ', err);
-       setError('Ошибка при загрузке фильмов');
-       setIsLoading(false);
-     });
-     setRequest(true)
-  } 
+      moviesApi.getInitialMovies()
+      .then((data) => {
+         setAllMovies(data);
+         setIsLoading(false);
+      })
+      .catch((err) => {
+         console.error('Ошибка при получении фильмов: ', err);
+         setError('Ошибка при загрузке фильмов');
+         setIsLoading(false);
+      });
+      setRequest(true)
+   } 
 
   const handleSearchMovies = (newQuery) => {
-      if (!request) {HandleRequest()}
+      HandleRequest()
       const lowercaseQuery = newQuery.toLowerCase();
       const searchResult = movies.filter(movie =>
         movie.nameRU.toLowerCase().includes(lowercaseQuery)
@@ -63,7 +63,7 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
 
   const renderContent = () => {
      if (isLoading) {
-        return <Preloader />;
+        return <Preloader isLoading={isLoading}/>;
      }
      if (error) {
         return <p>{error}</p>;
@@ -88,7 +88,7 @@ function Movies({ movies, error, onSave, savedMovies, setAllMovies, setError}) {
             initialValue={inputValue}
             onInputChange={setInputValue}
          />
-      {renderContent()}
+      {request && renderContent()}
     </section>
   );
 };

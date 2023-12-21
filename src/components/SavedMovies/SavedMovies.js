@@ -3,9 +3,11 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import filterMovies from '../../utils/config';
+import { mainApi } from '../../utils/MainApi';
 
-function SavedMovies({ savedMovies, onDelete, isLoading, error}) {
+function SavedMovies({ savedMovies, onDelete, isLoading, error, setSavedMovies, userSessionChanged}) {
   const [filteredMovies, setFilteredMovies] = useState(savedMovies);
+  const [conditions, setConditions] = useState()
   const [currentQuery, setCurrentQuery] = useState('');
   const [isShortMovies, setIsShortMovies] = useState(false);
 
@@ -22,8 +24,20 @@ function SavedMovies({ savedMovies, onDelete, isLoading, error}) {
   };
 
   useEffect(() => {
-    setFilteredMovies(savedMovies);
+    const result = filterMovies(savedMovies, currentQuery, isShortMovies);
+    setFilteredMovies(result);
   }, [savedMovies])
+
+  useEffect(() => {
+    console.log();
+    mainApi.getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((err) => {
+        console.error('Ошибка при получении сохраненных фильмов: ', err);
+      });
+  }, [userSessionChanged]);
 
   const renderContent = () => {
     if (isLoading) {

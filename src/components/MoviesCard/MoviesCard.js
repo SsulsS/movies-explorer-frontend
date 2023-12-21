@@ -1,9 +1,8 @@
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/config';
 import { formatDuration } from '../../utils/config';
-import { memo } from 'react';
 
-const MovieCard =memo(({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }) => {
+function MovieCard ({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }){
   const imageUrl = isSavedMoviePage ? movie.image : BASE_URL + movie.image.url;
   const isSaved = savedMovies.some(item => item?.movieId === movie.id);
 
@@ -17,6 +16,7 @@ const MovieCard =memo(({ movie, isSavedMoviePage, onSave, onDelete, savedMovies 
 
   return (
     <div className='card'>
+
       <div className='card__image-container'>
         <a href={movie.trailerLink} target="blank">
           <img src={imageUrl} alt={movie.nameRU} className='card__image' />
@@ -40,6 +40,6 @@ const MovieCard =memo(({ movie, isSavedMoviePage, onSave, onDelete, savedMovies 
       </div>
     </div>
   );
-})
+}
 
 export default MovieCard;

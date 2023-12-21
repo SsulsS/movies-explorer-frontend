@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.card__image-container{
+  display: flex;
+}
+
 .card__image {
   width: 360px;
   height: 201px;
@@ -41,7 +45,7 @@
 }
 
 .card__save-button_saved {
-  background-image: url(../..//images/check.svg);
+  background-image: url(../../images/check.svg);
   background-color: #FF4062;
   border-radius: 50px;
   background-repeat: no-repeat;
@@ -105,10 +109,6 @@
   .card__title {
      width: 75%;
   }
-
-  .card__save-button{
-    right: 35px;
-  }
 }
 
 @media screen and (max-width: 1160px) {
@@ -120,37 +120,11 @@
   .card__details {
      margin-top: 10px;
   }
-
-  .card__save-button{
-    right: 136px;
-  }
-}
-
-@media screen and (max-width: 1060px) {
-  .card__save-button{
-    right: 125px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .card__save-button{
-    right: 100px;
-  }
 }
 
 @media screen and (max-width: 960px) {
   .card__details {
      margin-top: 21px;
-  }
-
-  .card__save-button{
-    right: 75px;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .card__save-button{
-    right: 60px;
   }
 }
 
@@ -159,21 +133,13 @@
      width: 339px;
      height: 190px;
   }
-
-  .card__save-button{
-    right: 60px;
-  }
 }
 
 @media (max-width: 760px) {
   .card__image {
      width: 300px;
      height: 168px;
-  }
-
-  .card__save-button{
-    right: 40px;
-  }
+  }  
 }
 
 @media (max-width: 700px) {
@@ -181,10 +147,7 @@
      width: 280px;
      height: 156px;
   }
-
-  .card__save-button{
-    right: 50px;
-  }
+  
 }
 
 @media (max-width: 660px) {
@@ -194,11 +157,6 @@
   }
 
   .card__save-button{
-    right: 30px;
-    display: block;
-  }
-
-  .card__delete-button{
     display: block;
   }
 }

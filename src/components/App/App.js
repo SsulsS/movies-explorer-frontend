@@ -125,7 +125,7 @@ function App() {
   };
 
 
-  const handleDeleteMovie =  useCallback((movie) => {
+  const handleDeleteMovie = async (movie) => {
      mainApi.removeMovie(movie._id)
       .then((res) => {
         setSavedMovies(
@@ -135,8 +135,7 @@ function App() {
       .catch((err) => {
         console.error('Ошибка при удалении фильма: ', err);
       });
-  }, [])
-
+  }
   
 
 
@@ -173,18 +172,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log();
-    mainApi.getSavedMovies()
-      .then((movies) => {
-        setSavedMovies(movies);
-      })
-      .catch((err) => {
-        console.error('Ошибка при получении сохраненных фильмов: ', err);
-      });
-  }, [userSessionChanged]);
-
-
-  useEffect(() => {
     if (loggedIn && (location.pathname === '/sign-in' || location.pathname === '/sign-up')) {
       navigate('/movies');
     }
@@ -217,6 +204,8 @@ function App() {
             component={SavedMovies}
             savedMovies={savedMovies}
             onDelete={handleDeleteMovie}
+            setSavedMovies={setSavedMovies}
+            userSessionChanged={userSessionChanged}
           />
           }/>
           <Route path="/profile" element={
