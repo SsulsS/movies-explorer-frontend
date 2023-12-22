@@ -1,36 +1,45 @@
 import './MoviesCard.css';
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { BASE_URL } from '../../utils/config';
+import { formatDuration } from '../../utils/config';
 
-const MoviesCard = ({ card }) => {
-  const [favorite, setFavorite] = React.useState(false);
+function MovieCard ({ movie, isSavedMoviePage, onSave, onDelete, savedMovies }){
+  const imageUrl = isSavedMoviePage ? movie.image : BASE_URL + movie.image.url;
+  const isSaved = savedMovies.some(item => item?.movieId === movie.id);
 
-  function handleFavoriteToogle() {
-    setFavorite(!favorite);
-  }
+  const handleSave = () => {
+    onSave(movie);
+  };
 
-  const { pathname } = useLocation();
+  const handleDelete = () => {
+    onDelete(movie);
+  };
 
   return (
-    <li className="card">
-      <img src={card.image} alt={card.title} className="card__image"></img>
-      <div className="card__element">
-        <h2 className="card__title">{card.title}</h2>
-        <div className="card__buttons">
-          {pathname === '/saved-movies' ? (
-            <button type="button" className="card__button card__button_delete" />
-          ) : (
-            <button
-              type="button"
-              className={`card__button card__button${favorite ? '_active' : '_inactive'}`}
-              onClick={handleFavoriteToogle}
-            />
-          )}
-        </div>
-      </div>
-      <p className="card__duration">{card.duration}</p>
-    </li>
-  );
-};
+    <div className='card'>
 
-export default MoviesCard;
+      <div className='card__image-container'>
+        <a href={movie.trailerLink} target="blank">
+          <img src={imageUrl} alt={movie.nameRU} className='card__image' />
+        </a>
+        {isSavedMoviePage ? (
+          <button className='card__delete-button card__save-button' onClick={handleDelete}>
+          </button>
+
+        ) : (
+          <button
+            className={`card__save-button ${isSaved ? 'card__save-button_saved' : ''}`}
+            onClick={handleSave}
+          >
+            {isSaved ? '' : 'Сохранить'}
+          </button>
+        )}
+      </div>
+      <div className='card__details'>
+        <span className='card__title'>{movie.nameRU}</span>
+        <span className='card__duration'>{formatDuration(movie.duration)}</span>
+      </div>
+    </div>
+  );
+}
+
+export default MovieCard;
